@@ -19,15 +19,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  sidebar,
 }: Readonly<{
   children: React.ReactNode;
+  sidebar: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="mx-auto p-5 max-w-3xl">{children}</div>
+        <div className="mx-auto p-5 max-w-3xl flex justify-between">
+          <main className="p-5">{children}</main>
+          <aside className="bg-gray-200 p-5 min-h-40">{sidebar}</aside>
+        </div>
       </body>
     </html>
   );
