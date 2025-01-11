@@ -30,18 +30,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased m-0 relative`}
       >
         <div className="mx-auto p-5 max-w-3xl flex justify-between">
           <main className="p-5">
             <nav>
-              <Link href="/login">Open modal</Link>
+              <Link href="/login">Login</Link>
             </nav>
-            <div>{auth}</div>
             {children}
           </main>
           <aside className="bg-gray-200 p-5 min-h-40">{sidebar}</aside>
         </div>
+        {auth}
       </body>
     </html>
   );

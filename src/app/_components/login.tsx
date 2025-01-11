@@ -1,7 +1,7 @@
 export function Login() {
   return (
     <>
-      <form action="">
+      <form action="" method="post">
         <div>
           <label>
             ID:
@@ -14,6 +14,7 @@ export function Login() {
             <input type="password" name="password" />
           </label>
         </div>
+        <button type="submit">Login</button>
       </form>
     </>
   );
