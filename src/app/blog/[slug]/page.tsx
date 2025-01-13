@@ -1,10 +1,18 @@
-export async function generateStaticParams() {
-  const posts = ["1", "2", "3", "4", "5"];
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+}
 
+export async function generateStaticParams() {
+  const posts: Post[] = await fetch("https://api.vercel.app/blog").then((res) =>
+    res.json(),
+  );
   return posts.map((post) => ({
-    slug: post,
+    slug: String(post.id),
   }));
 }
+export const revalidate = 10;
 export const dynamicParams = false;
 
 export default async function Page({
@@ -12,6 +20,15 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const slug = (await params).slug;
-  return <h1>Blog {slug}</h1>;
+  const id = (await params).slug;
+  const post: Post = await fetch(`https://api.vercel.app/blog/${id}`).then(
+    (res) => res.json(),
+  );
+  return (
+    <>
+      <h1>{post.title}</h1>
+      <p>{post.content}</p>
+      <p>Current Time: {new Date().toLocaleString()}</p>
+    </>
+  );
 }
